@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { Button, Text, View } from "react-native";
+import { TextInput } from "react-native-web";
 
-export default function App() {
+const Cat = () => {
+  const [text, setText] = useState('');
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View>
+       <TextInput
+        value={text}
+        style={{height: 40}}
+        placeholder="inserisci"
+        //onChangeText={this.onChangeTextHandle}
+        onChangeText={newText => setText(newText)}
+        defaultValue={text}
+      />
+      <Button
+        title="Clicca"
+        onPress={() => setText('jkhjkkh')}
+      />
+      
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default Cat;
