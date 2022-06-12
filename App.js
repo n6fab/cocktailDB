@@ -4,20 +4,28 @@ import { TextInput } from "react-native-web";
 
 const Cat = () => {
   const [text, setText] = useState('');
-
+  const [search, setSearch] = useState('');
+ 
+//  const stampa
   return (
     <View>
+       <p>{search}</p>
        <TextInput
-        value={text}
         style={{height: 40}}
         placeholder="inserisci"
         //onChangeText={this.onChangeTextHandle}
-        onChangeText={newText => setText(newText)}
-        defaultValue={text}
+     onSubmitText={newText => setText(newText)}
+      //onSubmitEditing={stampa}
+      onPress={stampa}
+    
+     onChangeText={newText => setText(newText)}
+     defaultValue={text}
+       // defaultValue={text}
       />
       <Button
         title="Clicca"
-        onPress={() => setText('jkhjkkh')}
+      //  onPress={() => stampa()}
+       onPress={() => setSearch(text)}
       />
       
     </View>
@@ -25,3 +33,8 @@ const Cat = () => {
 }
 
 export default Cat;
+
+const stampa = () => {
+  //setText(newText);
+  console.warn(text);
+}
