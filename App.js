@@ -1,40 +1,75 @@
 import React, { useState } from "react";
-import { Button, Text, View } from "react-native";
-import { TextInput } from "react-native-web";
+import { TextInput, StyleSheet, Button, View  } from "react-native-web";
+import axios from "axios";
 
-const Cat = () => {
+export default class PostList extends React.Component {
+  state = {
+    drinks: []
+   }
+  
+   componentDidMount() {
+  //  axios.get(`https://jsonplaceholder.typicode.com/posts`)
+    //axios.get(`https://jsonplaceholder.typicode.com/users`)
+    axios.get(`https://thecocktaildb.com/api/json/v1/1/search.php/?s=`)
+   .then(res => {
+      const drinks = res.data.drinks;
+      this.setState({ drinks });
+     })
+   }
+  
+   render() {
+    return (
+     <ul>
+      { 
+    //this.state.drinks.map(drink=> <li>{drink.title}</li>)
+    //this.state.drinks.map(drink=> <li>{drink.name}</li>)
+     this.state.drinks.map(drink=> <li>{drink.strDrink}</li>)
+      }
+     </ul>
+    )
+   }
+}
+  
+/*
+const App = () => {
   const [text, setText] = useState('');
   const [search, setSearch] = useState('');
+
  
-//  const stampa
   return (
     <View>
        <p>{search}</p>
        <TextInput
-        style={{height: 40}}
+         style={styles.input}
         placeholder="inserisci"
-        //onChangeText={this.onChangeTextHandle}
-     onSubmitText={newText => setText(newText)}
-      //onSubmitEditing={stampa}
-      onPress={stampa}
-    
-     onChangeText={newText => setText(newText)}
-     defaultValue={text}
-       // defaultValue={text}
+        //  onChange={() => navigate("")}
+  
+      onChangeText={newText => setText(newText)}
+      defaultValue={text}
       />
+      
       <Button
+        style={{height: 40, width: 100, borderColor: 'gray', borderWidth: 1}}
         title="Clicca"
-      //  onPress={() => stampa()}
-       onPress={() => setSearch(text)}
+        onPress={() => setSearch(text)}
+        
+    // onPress={() => navigation.navigate(`www.thecocktaildb.com/api/json/v1/1/search.php?s=${text}`)}
+      // www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita
       />
       
     </View>
   );
 }
 
-export default Cat;
+export default App;
 
-const stampa = () => {
-  //setText(newText);
-  console.warn(text);
-}
+
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    width: 100,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+});*/
